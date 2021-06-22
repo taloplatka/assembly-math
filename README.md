@@ -1,4 +1,4 @@
-# assembly-math
+# iMath
 A desktop app for kids in first grade who want to practice their math (School Project)
 
 # How to use
