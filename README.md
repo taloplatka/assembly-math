@@ -1,5 +1,5 @@
 # assembly-math
-An app for kids in first grade who want to practice their math (School Project)
+A desktop app for kids in first grade who want to practice their math (School Project)
 
 # How to use
 In order to use the code, you'll need TASM, Dosbox and TLINK. 
