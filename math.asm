@@ -4,6 +4,8 @@ MODEL small
 STACK 256
 p386
 DATASEG
+
+    hasGeneratedSeed db 0
     ;; Home 
     column dw ? ;; The column in which the "Start Game" button starts
     row dw ? ;; The row in which the "Start Game" button starts
@@ -761,16 +763,20 @@ endp CalcNew
 
 ;; Generates a random number between 0-9
 proc generateBasicRandomNumber
+    cmp [hasGeneratedSeed], 1
+    je CONTINUE_GENERATOR
     mov     AH, 00h   ; interrupt to get system timer in CX:DX 
     int     1AH
     mov     [PRN], dx
+    mov [hasGeneratedSeed], 0
+    CONTINUE_GENERATOR:
     call    CalcNew   ; -> AX is a random number
     xor     dx, dx
     mov     cx, 10    
     div     cx        ; here dx contains the remainder - from 0 to 9
     ;add     dl, '0'   ; to ascii from '0' to '9'
     mov [randomNumber], dl
-     call    CalcNew   ; -> AX is another random number
+    call    CalcNew   ; -> AX is another random number
     ret
 endp generateBasicRandomNumber
 start:
